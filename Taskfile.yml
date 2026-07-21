@@ -1,0 +1,62 @@
+version: "3"
+
+vars:
+  DESIGN_LAB: proyecto-integrador/design-lab
+  UI_LAB: proyecto-integrador/ui-lab
+  API_TESTS: proyecto-integrador/api-tests
+  API_LAB: proyecto-integrador/api-lab
+
+tasks:
+  # ── Sesión 1: Diseño de pruebas ───────────────────────────────────────────
+  setup:
+    desc: "S1 — Instala dependencias del laboratorio de diseño (uv sync)"
+    dir: "{{.DESIGN_LAB}}"
+    cmds:
+      - uv sync
+
+  test:design:
+    desc: "S1 — Suite de técnicas de diseño: EP, BVA, decisión y pairwise"
+    dir: "{{.DESIGN_LAB}}"
+    cmds:
+      - uv run pytest -v
+
+  # ── Sesión 2: POM, Screenplay y Data-Driven ───────────────────────────────
+  setup:ui:
+    desc: "S2 — Instala dependencias del laboratorio de UI y descarga Chromium"
+    dir: "{{.UI_LAB}}"
+    cmds:
+      - uv sync --group dev
+      - uv run playwright install chromium
+
+  test:ui:
+    desc: "S2 — Suite de UI: POM, Screenplay y data-driven sobre SauceDemo"
+    dir: "{{.UI_LAB}}"
+    cmds:
+      - uv run pytest -v
+
+  test:ui:headed:
+    desc: "S2 — Suite de UI con navegador visible (útil para depurar)"
+    dir: "{{.UI_LAB}}"
+    cmds:
+      - uv run pytest --headed -v
+
+  # ── Sesión 3: APIs REST con Postman + Newman ──────────────────────────────
+  test:api:postman:
+    desc: "S3 — Corre la colección Postman de CRUD con Newman (vía npx)"
+    dir: "{{.API_TESTS}}"
+    cmds:
+      - npx --yes newman run postman/s3_crud_jsonplaceholder.postman_collection.json
+        --environment postman/jsonplaceholder.postman_environment.json
+
+  # ── Sesión 4: APIs con Python (httpx + pytest) ────────────────────────────
+  setup:api:
+    desc: "S4 — Instala dependencias del laboratorio de APIs (uv sync)"
+    dir: "{{.API_LAB}}"
+    cmds:
+      - uv sync --group dev
+
+  test:api:
+    desc: "S4 — Suite de APIs: cliente httpx, fixtures y data-driven sobre JSONPlaceholder"
+    dir: "{{.API_LAB}}"
+    cmds:
+      - uv run pytest -v
