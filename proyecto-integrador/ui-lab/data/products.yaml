@@ -17,19 +17,18 @@ products:
 # debe mostrar la burbuja del carrito al terminar.
 cart_scenarios:
   - description: "agregar un solo producto"
-    items:
-      - "Sauce Labs Backpack"
+    items: ["Sauce Labs Backpack"]
     count: 1
-
   - description: "agregar dos productos distintos"
-    items:
-      - "Sauce Labs Backpack"
-      - "Sauce Labs Bike Light"
+    items: ["Sauce Labs Backpack", "Sauce Labs Bike Light"]
     count: 2
-
   - description: "agregar tres productos distintos"
+    items: ["Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt"]
+    count: 3
+  - description: "agregar cuatro productos distintos"
     items:
       - "Sauce Labs Backpack"
       - "Sauce Labs Bike Light"
       - "Sauce Labs Bolt T-Shirt"
-    count: 3
+      - "Sauce Labs Fleece Jacket"
+    count: 4
