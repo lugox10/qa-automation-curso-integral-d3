@@ -1,0 +1,26 @@
+[
+    {
+        "caso": "usuario_normal",
+        "payload": {
+            "name": "Usuario Normal",
+            "username": "normal_user",
+            "email": "normal@example.com"
+        }
+    },
+    {
+        "caso": "nombre_largo",
+        "payload": {
+            "name": "Un nombre de usuario muy largo que podría causar problemas si la API tiene límites",
+            "username": "largo_user",
+            "email": "largo@example.com"
+        }
+    },
+    {
+        "caso": "caracteres_especiales",
+        "payload": {
+            "name": "Áéíóú ñ 中文 🚀",
+            "username": "special_user",
+            "email": "special@example.com"
+        }
+    }
+]
